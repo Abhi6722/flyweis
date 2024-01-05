@@ -116,7 +116,7 @@ class SelectYourCategory extends StatelessWidget {
                       ),
                       backgroundColor: const Color(0xfff52d56)),
                   onPressed: () {
-                    Get.to(() => const LoginPage());
+                    Get.to(() => LoginPage());
                   },
                   child: Text(
                     'Next',

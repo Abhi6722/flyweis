@@ -5,9 +5,12 @@ import 'package:rajiv_cab_user_app/View/OTPPage/otp_page.dart';
 import 'package:rajiv_cab_user_app/View/SelectLanguagePage/select_language_page.dart';
 import 'package:rajiv_cab_user_app/View/SignUp/sign_up_page.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({Key? key}) : super(key: key);
+import 'package:rajiv_cab_user_app/controllers/login_controller.dart';
 
+class LoginPage extends StatelessWidget {
+  LoginPage({Key? key}) : super(key: key);
+
+  final LoginController _loginController = LoginController();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -51,6 +54,7 @@ class LoginPage extends StatelessWidget {
                       ),
                       border: Border.all(color: Colors.grey)),
                   child: TextField(
+                    controller: _loginController.phoneNumberController,
                     style: TextStyle(fontWeight: FontWeight.normal,fontSize: 14*AppConstants.text),
                     decoration: const InputDecoration(
                         focusedBorder: InputBorder.none,
@@ -61,23 +65,27 @@ class LoginPage extends StatelessWidget {
                 ),
                 SizedBox(height: AppConstants.height*0.03,),
                 SizedBox(
-                  width: AppConstants.width*0.999,
-                  height:AppConstants.height*0.06,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Get.to(OtpScreen());
-                      // _loginController.callLogin();
+                  width: AppConstants.width * 0.999,
+                  height: AppConstants.height * 0.06,
+                  child: Obx(() => ElevatedButton(
+                    onPressed: _loginController.isLoading.value
+                        ? null // Disable button when loading
+                        : () {
+                      _loginController.loginUser();
                     },
-                    style:ElevatedButton.styleFrom(
-                        backgroundColor:const Color(0xfff52d56),
-                        shape:
-                            RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5))),
-                    child: const Text(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xfff52d56),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                    ),
+                    child: _loginController.isLoading.value
+                        ? const CircularProgressIndicator() // Show loading indicator
+                        : const Text(
                       'Continue',
                       style: TextStyle(color: Colors.white),
                     ),
-                  ),
+                  )),
                 ),
                 SizedBox(height: AppConstants.height*0.02,),
 
