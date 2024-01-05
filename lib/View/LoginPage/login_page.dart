@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rajiv_cab_user_app/Constants/Konstants.dart';
-import 'package:rajiv_cab_user_app/View/OTPPage/otp_page.dart';
 import 'package:rajiv_cab_user_app/View/SelectLanguagePage/select_language_page.dart';
 import 'package:rajiv_cab_user_app/View/SignUp/sign_up_page.dart';
 
@@ -10,7 +9,8 @@ import 'package:rajiv_cab_user_app/controllers/login_controller.dart';
 class LoginPage extends StatelessWidget {
   LoginPage({Key? key}) : super(key: key);
 
-  final LoginController _loginController = LoginController();
+  final LoginController _loginController = Get.find();
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -20,7 +20,6 @@ class LoginPage extends StatelessWidget {
             padding:  const EdgeInsets.all(8.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              // mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SizedBox(height: AppConstants.height*0.06,),
                 const Center(
@@ -69,7 +68,7 @@ class LoginPage extends StatelessWidget {
                   height: AppConstants.height * 0.06,
                   child: Obx(() => ElevatedButton(
                     onPressed: _loginController.isLoading.value
-                        ? null // Disable button when loading
+                        ? null
                         : () {
                       _loginController.loginUser();
                     },
@@ -80,7 +79,7 @@ class LoginPage extends StatelessWidget {
                       ),
                     ),
                     child: _loginController.isLoading.value
-                        ? const CircularProgressIndicator() // Show loading indicator
+                        ? const CircularProgressIndicator()
                         : const Text(
                       'Continue',
                       style: TextStyle(color: Colors.white),
