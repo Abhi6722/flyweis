@@ -89,7 +89,9 @@ class OtpScreen extends StatelessWidget {
                       style: TextStyle(color: Colors.grey)
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      _loginController.resendOTP();
+                    },
                     child: const Text('Resend',style: TextStyle(color: Colors.black),),
                   )
                 ],

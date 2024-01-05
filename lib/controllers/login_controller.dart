@@ -99,4 +99,43 @@ class LoginController {
       );
     }
   }
+
+  Future<void> resendOTP() async {
+    try {
+      String phoneNumber = phoneNumberController.text;
+      final url = Uri.parse('${AppConstants.apiURL}/user/login');
+      final response = await http.post(
+        url,
+        body: jsonEncode({'mobileNumber': phoneNumber}),
+        headers: {'Content-Type': 'application/json'},
+      );
+
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> responseData = jsonDecode(response.body);
+        print(responseData);
+        Get.snackbar(
+          'Success',
+          'OTP Sent Successful',
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.green,
+        );
+      } else {
+        print('Request failed with status: ${response.statusCode}');
+        Get.snackbar(
+          'Error',
+          'Failed to send OTP',
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.red,
+        );
+      }
+    } catch (e) {
+      print('Exception: $e');
+      Get.snackbar(
+        'Error',
+        'Exception occurred',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.red,
+      );
+    }
+  }
 }
