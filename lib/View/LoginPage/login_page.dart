@@ -4,12 +4,12 @@ import 'package:rajiv_cab_user_app/Constants/Konstants.dart';
 import 'package:rajiv_cab_user_app/View/SelectLanguagePage/select_language_page.dart';
 import 'package:rajiv_cab_user_app/View/SignUp/sign_up_page.dart';
 
-import 'package:rajiv_cab_user_app/controllers/login_controller.dart';
+import 'package:rajiv_cab_user_app/controllers/auth_controller.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({Key? key}) : super(key: key);
 
-  final LoginController _loginController = Get.find();
+  final AuthController _loginController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -171,7 +171,7 @@ class LoginPage extends StatelessWidget {
                     SizedBox(width: AppConstants.width*0.02,),
                     TextButton(
                       onPressed: () {
-                        Get.to(RegisterScreen());
+                        Get.to(() => RegisterScreen());
                       },
                       child: const Text('Sign up',style: TextStyle(color: Colors.black),),
 

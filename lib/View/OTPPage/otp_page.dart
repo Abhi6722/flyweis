@@ -3,11 +3,11 @@ import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:rajiv_cab_user_app/Constants/Konstants.dart';
 
-import '../../controllers/login_controller.dart';
+import '../../controllers/auth_controller.dart';
 
 class OtpScreen extends StatelessWidget {
   OtpScreen({Key? key}) : super(key: key);
-  final LoginController _loginController = Get.find();
+  final AuthController _loginController = Get.find();
 
   @override
   Widget build(BuildContext context) {
