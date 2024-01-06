@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../Constants/Konstants.dart';
 import '../View/HomePage/home_page.dart';
 import '../View/OTPPage/otp_page.dart';
@@ -53,6 +54,9 @@ class AuthController {
       if (response.statusCode == 200) {
         final Map<String, dynamic> responseData = jsonDecode(response.body);
         print(responseData);
+        userId = responseData['user']['_id'];
+        print(userId);
+        await _storeUserId(userId);
         isLoading.value = false;
         Get.to(() => OtpScreen());
         Get.snackbar(
@@ -98,6 +102,9 @@ class AuthController {
       if (response.statusCode == 200) {
         final Map<String, dynamic> responseData = jsonDecode(response.body);
         print(responseData);
+        userId = responseData['user']['_id'];
+        print(userId);
+        await _storeUserId(userId);
         Get.offAll(() => const HomePage());
         isLoading.value = false;
         Get.snackbar(
@@ -183,6 +190,7 @@ class AuthController {
         print(responseData);
         userId = responseData['user']['_id'];
         print(userId);
+        await _storeUserId(userId);
         isLoading.value = false;
         Get.to(() => OtpScreen());
       } else {
@@ -222,7 +230,7 @@ class AuthController {
       if (response.statusCode == 200) {
         final Map<String, dynamic> responseData = jsonDecode(response.body);
         print(responseData);
-        bool success = await updateUserProfile(); // Await the profile update function
+        bool success = await updateUserProfile();
 
         if (success) {
           Get.to(() => OtpScreen());
@@ -294,5 +302,10 @@ class AuthController {
       print('Exception: $e');
       return false;
     }
+  }
+
+  Future<void> _storeUserId(String userId) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('userId', userId);
   }
 }
