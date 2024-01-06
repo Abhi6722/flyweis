@@ -3,8 +3,11 @@ import 'package:get/get.dart';
 import 'package:rajiv_cab_user_app/View/payment/PaymentPage.dart';
 
 import '../../Constants/Konstants.dart';
+import '../../controllers/wallet_controller.dart';
 class MyWallet extends StatelessWidget {
-  const MyWallet({super.key});
+  MyWallet({super.key});
+
+  final WalletController walletController = Get.put(WalletController());
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +22,7 @@ class MyWallet extends StatelessWidget {
                   children: [
                     Container(
                       height: AppConstants.height * 0.4,
-                      color: Color(0xfff52d56),
+                      color: const Color(0xfff52d56),
                       padding: const EdgeInsets.all(8),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -49,19 +52,24 @@ class MyWallet extends StatelessWidget {
                                 ),
                                 SizedBox(
                                   width: AppConstants.width*0.3,
-                                  child: Card(color: Color(0xffe92b52),
+                                  child: Card(color: const Color(0xffe92b52),
                                     elevation: 0,
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(25)
                                     ),
                                     child: Padding(
-                                      padding:  EdgeInsets.symmetric(horizontal: 5,vertical: 4),
+                                      padding:  const EdgeInsets.symmetric(horizontal: 5,vertical: 4),
                                       child: Row(
                                         mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
                                           Image.asset('assets/images/coin.png'),
                                           SizedBox(width: AppConstants.width*0.01,),
-                                          Text('2500',style: TextStyle(color: Colors.white,fontSize:15*AppConstants.text,fontWeight: FontWeight.bold),)
+                                          Obx(
+                                                () => Text(
+                                              '${walletController.balance}',
+                                              style: TextStyle(color: Colors.white,fontSize:15*AppConstants.text,fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
                                         ],
                                       ),
                                     ),
@@ -82,7 +90,7 @@ class MyWallet extends StatelessWidget {
                   child: SizedBox(
                       width: AppConstants.width*0.7,
                       height: AppConstants.height*0.1,
-                      child: Card(color: Colors.white,surfaceTintColor: Colors.white,)),
+                      child: const Card(color: Colors.white,surfaceTintColor: Colors.white,)),
                 ),
                 Positioned(
                   top: AppConstants.height*0.22,
@@ -90,7 +98,7 @@ class MyWallet extends StatelessWidget {
                   child: SizedBox(
                       width: AppConstants.width*0.8,
                       height: AppConstants.height*0.1,
-                      child: Card(color: Colors.white,surfaceTintColor: Colors.white,)),
+                      child: const Card(color: Colors.white,surfaceTintColor: Colors.white,)),
                 ),
                 Positioned(
                   top: AppConstants.height*0.24,
@@ -134,8 +142,13 @@ class MyWallet extends StatelessWidget {
                                 children: [
                                   Row(
                                     children: [
-                                    Icon(Icons.currency_rupee,color: Colors.green,),
-                                      Text('2500',style: TextStyle(color: Colors.green,fontSize: 20*AppConstants.text),),
+                                    const Icon(Icons.currency_rupee,color: Colors.green,),
+                                      Obx(
+                                            () => Text(
+                                          '${walletController.balance}',
+                                          style: TextStyle(color: Colors.green,fontSize: 20*AppConstants.text),
+                                        ),
+                                      ),
                                     ],
                                   ),
                                   Text('09/21',style: TextStyle(color: Colors.black,fontSize: 15*AppConstants.text),)
@@ -152,10 +165,10 @@ class MyWallet extends StatelessWidget {
             ),
             InkWell(
               onTap: (){
-                Get.to(PaymentPage());
+                Get.to(const PaymentPage());
               },
               child: Container(
-                margin: EdgeInsets.all(4),
+                margin: const EdgeInsets.all(4),
                 decoration: BoxDecoration(
                   border: Border.all(color: Colors.black12,width: 0.5),
                   color: Colors.white,
@@ -166,13 +179,13 @@ class MyWallet extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text('Payment Methods',style: TextStyle(color: Colors.black,fontSize: 15*AppConstants.text),),
-                      Icon(Icons.arrow_forward_ios,color: Colors.grey,)
+                      const Icon(Icons.arrow_forward_ios,color: Colors.grey,)
                     ],
                   ),
                 ),
               ),
             ),
-            Container(margin: EdgeInsets.all(4),
+            Container(margin: const EdgeInsets.all(4),
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.black12,width: 0.5),
                 color: Colors.white,
@@ -189,7 +202,7 @@ class MyWallet extends StatelessWidget {
                 ),
               ),
             ),
-            Container(margin: EdgeInsets.all(4),
+            Container(margin: const EdgeInsets.all(4),
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.black12,width: 0.5),
                 color: Colors.white,
