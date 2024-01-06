@@ -7,7 +7,7 @@ import '../../controllers/wallet_controller.dart';
 class MyWallet extends StatelessWidget {
   MyWallet({super.key});
 
-  final WalletController walletController = Get.put(WalletController());
+  final WalletController walletController = Get.find();
 
   @override
   Widget build(BuildContext context) {

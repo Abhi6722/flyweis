@@ -13,8 +13,12 @@ import 'package:rajiv_cab_user_app/View/Notification/notification_page.dart';
 import 'package:rajiv_cab_user_app/View/PrivacyPolicy/privacy_policy_page.dart';
 import 'package:rajiv_cab_user_app/View/SettingPage/setting_page.dart';
 import 'package:rajiv_cab_user_app/View/SupportPage/support_page.dart';
+
+import '../../controllers/wallet_controller.dart';
 class DrawerMenu extends StatelessWidget {
-  const DrawerMenu({Key? key}) : super(key: key);
+  DrawerMenu({Key? key}) : super(key: key);
+
+  final WalletController walletController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -74,8 +78,12 @@ class DrawerMenu extends StatelessWidget {
 
                               children: [
                                 Text('Cash',style: TextStyle(color: Color(0xfff52d56)),),
-                                Text('250',style: TextStyle(color: Color(0xfff52d56),fontWeight: FontWeight.bold),),
-
+                                Obx(
+                                      () => Text(
+                                    '${walletController.balance}',
+                                    style: TextStyle(color: Color(0xfff52d56),fontWeight: FontWeight.bold),
+                                  ),
+                                ),
                                 const Icon(
                                   Icons.arrow_forward_ios,
                                   size: 18,
